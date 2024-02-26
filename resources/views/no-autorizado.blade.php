@@ -6,6 +6,6 @@
     <title>No Autorizado</title>
 </head>
 <body>
-    <h1>No estás autorizado para ver esta página.</h1>
+    <h1>No estás autorizado para ver esta página Lastimosamente.</h1>
 </body>
 </html>
