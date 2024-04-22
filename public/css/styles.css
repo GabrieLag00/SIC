@@ -2,10 +2,7 @@
 
 body{
 	font-family: 'Roboto', sans-serif;
-	background-image: url('./Fondo.webp');
-    background-size: cover; /* Ensures that the background covers the entire body */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    background-position: center center; /* Centers the background image */
+    background-color: aliceblue;
 }
 * {
 	margin: 0;

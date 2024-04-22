@@ -27,7 +27,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('formulario'); // Asegúrate de que el archivo de la vista exista en resources/views/formulario.blade.php
     }
 
     /**
@@ -35,7 +35,21 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //para procesar el formulario de creacion
+        // Validación de los datos del formulario
+    $validatedData = $request->validate([
+        'name_student' => 'required|string|max:255',
+        'lastname_student' => 'required|string|max:255',
+        'id_student' => 'required|string|max:10|unique:students,id_student',
+        'birthday' => 'required|date',
+        'comments' => 'nullable|string'
+    ]);
+
+    // Creación del nuevo estudiante en la base de datos usando Eloquent ORM
+    $student = new Student($validatedData);
+    $student->save();
+
+    // Redirección a la lista de estudiantes con un mensaje de éxito
+    return redirect()->route('estudiantes.index')->with('success', 'Estudiante agregado correctamente.');
     }
 
     /**
@@ -78,6 +92,19 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        //permite eliminar registro
+        // Encuentra el estudiante usando el ID proporcionado
+    $student = Student::find($id);
+
+    // Verifica si el estudiante existe
+    if ($student) {
+        // Elimina el estudiante
+        $student->delete();
+
+        // Redirige a la lista de estudiantes con un mensaje de éxito
+        return redirect()->route('estudiantes.index')->with('success', 'Estudiante eliminado correctamente.');
+    } else {
+        // Si no se encuentra el estudiante, redirige con un mensaje de error
+        return redirect()->route('estudiantes.index')->with('error', 'Estudiante no encontrado.');
+    }
     }
 }

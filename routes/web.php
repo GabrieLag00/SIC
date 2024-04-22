@@ -36,17 +36,9 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware('auth')->group(function() {
-//incluye todo los metodos
-Route::resource('estudiantes', StudentController::class);//->middleware('auth');
-
-//Al entrar a la ruta alumnos se llamara al controlador, el formulario
-//Route::middleware('auth')->group(function (){
-Route::get('/alumnos', [StudentsController::class, 'index']);
-
-//Almacena los datos
-Route::post('/alumnos', [StudentsController::class, 'store']);
-//});
+    Route::resource('estudiantes', StudentController::class);
 });
+
 // Añade esta línea
 Route::view('/no-autorizado', 'no-autorizado')->name('no-autorizado');
 
